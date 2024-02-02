@@ -37,20 +37,16 @@ public class BookInfo implements ICommand
             case 2:
                 libraryRef.PrintAllUsers();
                 System.out.print("Enter NAME or ID:");
+
                 User userRec;
-                
-                if (scan.hasNextInt())
-                {
-                    int ID = scan.nextInt();
-                    userRec = libraryRef.GetUser(ID);
-                    userRec.PrintBorrowedBooks();
+                if (scan.hasNextInt()) {
+                    userRec = libraryRef.GetUser(scan.nextInt());
+                } else {
+                    userRec = libraryRef.GetUser(scan.next());
                 }
-                else
-                {
-                    String name = scan.next();
-                    userRec = libraryRef.GetUser(name);
-                    userRec.PrintBorrowedBooks();
-                }
+
+                userRec.PrintBorrowedBooks();
+
 
                 break;
 

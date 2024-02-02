@@ -1,16 +1,24 @@
 package library.system;
 
 import java.lang.reflect.Array;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Library {
+    Connection databaseRef;
+    public Library()
+    {
+         databaseRef = DataBase.getInstance().getConnection();
+    }
     private ArrayList<Book> books = new ArrayList<Book>(Arrays.asList(
-            new Book("Romeo and Juliet", "William Shakespeare", "Tragedy", "23DDD", 1596, 10, true),
-            new Book("Fight Club", "Chuck Palahniuk", "Novel", "43DFJ", 1996, 3, true),
-            new Book("Faust", "Johann Wolfgang Goethe", "Tragedy", "666DD", 1808, 6, true),
-            new Book("Bible", "unknown", "Religious text", "333", 0, 1, false)
+            new Book("Romeo and Juliet", "William Shakespeare", "Tragedy", 2323, 1596, 10, true),
+            new Book("Fight Club", "Chuck Palahniuk", "Novel", 4334, 1996, 3, true),
+            new Book("Faust", "Johann Wolfgang Goethe", "Tragedy", 666, 1808, 6, true),
+            new Book("Bible", "unknown", "Religious text", 333, 0, 1, false)
     ));
 
     private ArrayList<User> users = new ArrayList<User>(Arrays.asList(
@@ -25,8 +33,56 @@ public class Library {
     public void AddNewUser(User newUser)
     {
         if (!users.contains(newUser)) users.add(newUser);
+        try {
+            PreparedStatement ps = databaseRef.prepareStatement("INSERT INTO userstable (name, ID) VALUES (?,?) ");
+            ps.setString(1, newUser.getName());
+            ps.setInt(2, newUser.GetID());
+
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) System.out.println("User deleted successfully.");
+            else System.out.println("User not found or deletion failed.");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println(newUser.getName() + " was added successfully!");
 
+    }
+
+    public void DeleteUser(String name)
+    {
+        try {
+            PreparedStatement ps = databaseRef.prepareStatement("DELETE FROM userstable WHERE name = ?");
+
+            ps.setString(1, name);
+
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) System.out.println("User deleted successfully.");
+            else System.out.println("User not found or deletion failed.");
+
+            }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void DeleteUser(int id)
+    {
+        try {
+            PreparedStatement ps = databaseRef.prepareStatement("DELETE FROM userstable WHERE id = ?");
+
+            ps.setInt(1 , id);
+
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) System.out.println("User deleted successfully.");
+            else System.out.println("User not found or deletion failed.");
+
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void AddNewBook(Book newBook)

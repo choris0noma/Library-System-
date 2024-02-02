@@ -14,7 +14,7 @@ public class AddBook implements ICommand
         String title;
         String author;
         String genre;
-        String isbn;
+        int isbn;
         int year;
         int quantity;
         boolean flag;
@@ -30,7 +30,7 @@ public class AddBook implements ICommand
         genre = scan.nextLine();
 
         System.out.print("ISBN:");
-        isbn = scan.nextLine();
+        isbn = scan.nextInt();
 
         System.out.print("Year:");
         year = scan.hasNextInt()?  scan.nextInt() : 0;

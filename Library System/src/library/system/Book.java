@@ -2,17 +2,18 @@ package library.system;
 
 
 import java.time.Year;
+import java.util.Random;
 
 public class Book
 {
-    private String _title, _isbn, _genre, _author;
-    private int _year, _quantity;
+    private String _title, _genre, _author;
+    private int _year, _quantity, _isbn;
     private boolean _isForStudents = true;
 
     public String getTitle() {
         return _title;
     }
-    public String getIsbn(){
+    public int getIsbn(){
         return _isbn;
     }
     public String getGenre(){
@@ -22,16 +23,16 @@ public class Book
     public int getYear(){
         return _year;
     }
-    public boolean IsStdentBook() {return _isForStudents;}
+    public boolean IsStudentBook() {return _isForStudents;}
 
-    public Book(String title,String author, String genre, String isbn , int year, int quantity, boolean isForStudents)
+    public Book(String title,String author, String genre, int isbn , int year, int quantity, boolean isForStudents)
     {
         String DEF_STR = "Error";
         _title = !title.isEmpty() ? title.trim() : DEF_STR;
-        _isbn = !title.isEmpty() ? isbn : DEF_STR;
-        _genre = !title.isEmpty() ? genre : DEF_STR;
-        _author = !title.isEmpty() ? author : DEF_STR;
+        _genre = !genre.isEmpty() ? genre : DEF_STR;
+        _author = !author.isEmpty() ? author : DEF_STR;
         _year = year <= Year.now().getValue() ? year : 0;
+        _isbn = isbn > 0 ? isbn : new Random().nextInt(99999);
         _quantity = Math.max(quantity, 0);
         _isForStudents = isForStudents;
     }

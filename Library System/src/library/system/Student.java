@@ -20,7 +20,7 @@ public class Student extends User
 
     public void GrantBook(Book newBook)
     {
-        if (newBook.IsStdentBook())
+        if (newBook.IsStudentBook())
         {
             GrantBook(newBook);
             AlertSuccess(newBook);
