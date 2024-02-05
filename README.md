@@ -1,3 +1,3 @@
 Group Project OOP IT-2301
-Topic: Library 
-Members: Boranbayev Yersultan, Samat Alisher,Makhmud Danial
+Topic: Library System
+Members: Makhmud Danial, Boranbayev Yersultan, Samat Alisher
