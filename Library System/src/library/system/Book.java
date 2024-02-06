@@ -25,7 +25,7 @@ public class Book
     }
     public boolean IsStudentBook() {return _isForStudents;}
 
-    public Book(String title,String author, String genre, int isbn , int year, int quantity, boolean isForStudents)
+    public Book(int isbn , String title,String author, String genre, int year, boolean isForStudents, int quantity)
     {
         String DEF_STR = "Error";
         _title = !title.isEmpty() ? title.trim() : DEF_STR;

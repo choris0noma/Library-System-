@@ -19,34 +19,16 @@ public class GiveBook implements ICommand
         System.out.println("|| LIST OF BOOKS: ||");
         libraryRef.PrintAllBooks();
 
-        System.out.print("Enter book TITLE or NUMBER:");
-        Book bookGrant;
-        if (scan.hasNextInt())
-        {
-            int num = scan.nextInt() - 1;
-            bookGrant = libraryRef.GetBook(num);
-        }
-        else
-        {
-            String name = scan.next();
-            bookGrant = libraryRef.GetBook(name);
-        }
+        System.out.print("Enter book ISBN:");
+        int num = scan.nextInt();
 
-        User userRec;
         System.out.print("Enter user NAME or ID:");
-        if (scan.hasNextInt())
-        {
-            int id = scan.nextInt();
-            userRec = libraryRef.GetUser(id);
-            userRec.GrantBook(bookGrant);
-        }
-        else
-        {
-            String name = scan.next();
-            userRec = libraryRef.GetUser(name);
-            userRec.GrantBook(bookGrant);
-        }
+        int id = scan.nextInt();
 
+        System.out.print("Enter quantity:");
+        int quantity = scan.nextInt();
+
+        libraryRef.GiveBook(num, id, quantity);
 
     }
 

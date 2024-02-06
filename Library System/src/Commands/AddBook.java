@@ -44,7 +44,7 @@ public class AddBook implements ICommand
         String ans = scan.nextLine();
         flag= ans.trim().equalsIgnoreCase("yes");
 
-        Book newBook = new Book(title, author, genre, isbn, year, quantity, flag);
+        Book newBook = new Book(isbn, title, author, genre , year, flag, quantity);
         libraryRef.AddNewBook(newBook);
     }
 

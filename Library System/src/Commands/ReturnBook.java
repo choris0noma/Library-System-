@@ -13,31 +13,17 @@ public class ReturnBook implements ICommand
     {
         Scanner scan = new Scanner(System.in);
         libraryRef.PrintAllUsers();
-        System.out.print("Select user by NAME or ID:");
-        User userRec;
-        if (scan.hasNextInt())
-        {
-            int num = scan.nextInt();
-            userRec = libraryRef.GetUser(num);
-        }
-        else
-        {
-            String name = scan.next();
-            userRec = libraryRef.GetUser(name);
-        }
+        System.out.print("Select user ID:");
+        int id = scan.nextInt();
+        libraryRef.GetUserBorrowedBooks(id);
 
-        userRec.PrintBorrowedBooks();
-        System.out.print("Select book by TITLE or NUMBER:");
-        if (scan.hasNextInt())
-        {
-            int id = scan.nextInt() - 1;
-            userRec.GiveInBook(id);
-        }
-        else
-        {
-            String title = scan.nextLine();
-            userRec.GiveInBook(title);
-        }
-        System.out.println("The Book was returned");
+        System.out.print("Select book ISBN:");
+        int isbn = scan.nextInt();
+
+        System.out.print("Select book amount:");
+        int quantity = scan.nextInt();
+
+        libraryRef.ReturnBookToLib(isbn,id, quantity);
+
     }
 }

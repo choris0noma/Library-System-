@@ -12,43 +12,57 @@ public class BookInfo implements ICommand
     {
         Scanner scan = new Scanner(System.in);
         libraryRef.PrintAllBooks();
-        System.out.println("COMMANDS:\n 1. get info by number \n 2. to see users' borrowed books");
+        System.out.println("COMMANDS:\n 1. to see users' borrowed books \n 2. to update book info \n 3.to delete book");
         System.out.print("Enter:");
         int option = scan.nextInt();
 
         switch (option)
         {
             case 1:
-                System.out.print("Enter NUMBER or TITLE:");
-
-
-                if (scan.hasNextInt())
-                {
-                    int id = scan.nextInt();
-                    libraryRef.GetBook(id);
-                }
-                else
-                {
-                    String title = scan.nextLine();
-                    libraryRef.GetBook(title);
-                }
-
+                libraryRef.PrintAllUsers();
+                System.out.print("Enter ISBN:");
+                int id = scan.nextInt();
+                libraryRef.GetUserBorrowedBooks(id);
                 break;
             case 2:
-                libraryRef.PrintAllUsers();
-                System.out.print("Enter NAME or ID:");
+                System.out.print("Select by ISBN:");
+                int isbn = scan.nextInt();
+                scan.nextLine();
 
-                User userRec;
-                if (scan.hasNextInt()) {
-                    userRec = libraryRef.GetUser(scan.nextInt());
-                } else {
-                    userRec = libraryRef.GetUser(scan.next());
+                System.out.print("Enter NEW TITLE:");
+                String title = scan.nextLine();
+
+                System.out.print("Enter NEW AUTHOR:");
+                String author = scan.nextLine();
+
+                System.out.print("Enter NEW GENRE:");
+                String genre = scan.nextLine();
+
+                System.out.print("Enter NEW YEAR OF PUBLICATION:");
+                String yearInput = scan.nextLine();
+                Integer year = null;
+
+                if (!yearInput.isEmpty()) {
+                    try {
+                        year = Integer.parseInt(yearInput);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid year format. Year will be left unchanged.");
+                    }
                 }
 
-                userRec.PrintBorrowedBooks();
+                System.out.print("Enter NEW STATUS, is Student yes/no?:");
+                String ans = scan.next();
+                Boolean flag = null;
+                if (!ans.isEmpty()) {
+                   flag = ans.trim().equalsIgnoreCase("yes");
+                }
 
-
+                libraryRef.UpdateBook(isbn,title, author, genre, year, flag);
                 break;
+            case 3:
+                System.out.print("Enter ISBN:");
+                int num = scan.nextInt();
+                libraryRef.DeleteBook(num);
 
         }
     }
