@@ -14,7 +14,7 @@ public class DataBase
     private static DataBase INSTANCE;
     private Connection conn;
     private DataBase() {
-        // Private constructor to prevent instantiation
+        
     }
 
     public static DataBase getInstance() {
