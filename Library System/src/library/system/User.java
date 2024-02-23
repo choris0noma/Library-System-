@@ -48,25 +48,6 @@ public class User
         System.out.println();
     }
 
-    public void GiveInBook(int id)
-    {
-        if (id >= 0 && id < _borrowed_books.size()) _borrowed_books.remove(id);
-        else System.out.println("|| NOT FOUND ||");
-    }
-    public void GiveInBook(String name)
-    {
-        name = name.trim().toLowerCase();
-        for (Book b: _borrowed_books)
-        {
-            if (b.getTitle().toLowerCase().equals(name)) _borrowed_books.remove(b);
-        }
-        System.out.println("|| ERROR NOT FOUND ||");
-    }
-
-    public void GrantListBooks(ArrayList<Book> newBooks)
-    {
-        _borrowed_books.addAll(newBooks);
-    }
 
     public void GrantBook(Book newBook)
     {

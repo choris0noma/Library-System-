@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Student extends User
 {
 
-
+    private int year;
     public Student(String name, int id) {
         super(name, id);
     }
